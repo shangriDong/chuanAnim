@@ -38,9 +38,8 @@ public class MainActivity extends Activity {
         iv_temp = findViewById(R.id.yacht_hull_container);
         yacht_user_portrait = (MatrixDraweeView) findViewById(R.id.yacht_user_portrait);
 
-        //shearTransformation(yacht_user_portrait);
         Rotation rotation = new Rotation(yacht_user_portrait);
-        rotation.startRotation(0, 40, 0, 20);
+        rotation.startRotation(0, 40, 0, 15);
 
         AnimationSet animationSet = new AnimationSet(false);
         animationSet.setAnimationListener(new Animation.AnimationListener() {
