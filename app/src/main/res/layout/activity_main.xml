@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="defaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttextdefaulttext"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/iv_heart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/hear_anim" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:id="@+id/rl_temp_wave"
+            android:layout_width="wrap_content"
+            android:layout_height="240dp"
+            android:layout_marginTop="90dp"
+            android:alpha="0.5"
+            android:background="@drawable/yacht_water_one"
+            android:scaleX="1.4"
+            android:scaleY="1.3"
+            android:translationX="10dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="240dp"
+            android:layout_marginTop="90dp"
+            android:alpha="0.5"
+            android:background="@drawable/yacht_water_one"
+            android:scaleX="-1.4"
+            android:scaleY="1.3" />
+
+        <RelativeLayout
+            android:id="@+id/rl_temp_anim"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="160dp"
+                android:background="@drawable/yacht_shadow" />
+
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/yacht_hull" />
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

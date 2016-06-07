@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/yacht_container"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:visibility="visible">
+
+    <RelativeLayout
+        android:id="@+id/yacht_heart_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/gift_yacht_heart_height"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="280dp">
+
+        <ImageView
+            android:id="@+id/yacht_heart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:id="@+id/yacht_heart_arrow"
+            android:layout_width="@dimen/gift_full_heart_arrow_width"
+            android:layout_height="50.0dip"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="30.0dip"
+            android:src="@drawable/yacht_heart_arrow"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/yacht_water_view"
+        android:layout_width="fill_parent"
+        android:layout_height="256.0dip"
+        android:layout_alignParentBottom="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/yacht_water_one" />
+
+    <RelativeLayout
+        android:id="@+id/yacht_hull_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/yacht_water_view"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:visibility="invisible">
+
+        <RelativeLayout
+            android:id="@+id/yacht_ship_hull"
+            android:layout_width="@dimen/gift_yacht_hull_width"
+            android:layout_height="@dimen/gift_yacht_hull_height"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/img_yacht_hull"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10.0dip"
+                android:src="@drawable/yacht_hull" />
+
+            <com.dqs.shangri.customview.MatrixDraweeView
+                android:id="@+id/yacht_user_portrait"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="115.0dip"
+                android:layout_marginTop="20.0dip"
+                android:padding="3.5dip" />
+            <!--android:layout_width="59.0dip"
+            android:layout_height="59.0dip"-->
+            <!--android:background="@drawable/yacht_sender_bg"-->
+            <TextView
+                android:id="@+id/txt_yacht_sender_name"
+                style="@style/yacht_sender_name_txt"
+                android:layout_marginBottom="23.0dip" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/yacht_hull_shadow"
+            android:layout_width="222.0dip"
+            android:layout_height="79.0dip"
+            android:layout_below="@+id/yacht_ship_hull"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20.0dip"
+            android:src="@drawable/yacht_shadow" />
+    </RelativeLayout>
+</RelativeLayout>

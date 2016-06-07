@@ -1,0 +1,40 @@
+<resources>
+
+    <style name="gift_full_yacht_heart_container">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">@dimen/gift_yacht_heart_height</item>
+        <item name="android:layout_marginTop">@dimen/gift_yacht_heart_margintop</item>
+        <item name="android:minHeight">@dimen/gift_yacht_heart_height</item>
+    </style>
+
+    <style name="wrap_wrap">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="btn_room_share" parent="@style/wrap_wrap">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="gift_full_yacht_heart_inside_container">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
+    <style name="yacht_sender_name_txt" parent="@style/wrap_wrap">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:ellipsize">middle</item>
+        <item name="android:paddingLeft">30.0dip</item>
+        <item name="android:paddingRight">15.0dip</item>
+        <item name="android:text">加菲猫和小贝贝送你一个游艇</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:shadowColor">@color/room_gift_text_shadow</item>
+        <item name="android:shadowDx">2.0</item>
+        <item name="android:shadowDy">2.0</item>
+        <item name="android:shadowRadius">1.0</item>
+    </style>
+</resources>
