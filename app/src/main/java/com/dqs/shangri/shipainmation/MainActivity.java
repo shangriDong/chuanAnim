@@ -1,7 +1,10 @@
 package com.dqs.shangri.shipainmation;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
-import android.graphics.Matrix;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 import android.os.Bundle;
@@ -27,6 +30,8 @@ public class MainActivity extends Activity {
     private ImageView arrowIV;
     private int relativeToParent;
     private MatrixDraweeView yacht_user_portrait;
+    private ImageView yacht_water_view_one;
+    private ImageView yacht_water_view_two;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,18 @@ public class MainActivity extends Activity {
         arrowIV = (ImageView) findViewById(R.id.yacht_heart_arrow);
         iv_temp = findViewById(R.id.yacht_hull_container);
         yacht_user_portrait = (MatrixDraweeView) findViewById(R.id.yacht_user_portrait);
+        yacht_water_view_one = (ImageView) findViewById(R.id.yacht_water_view_one);
+        yacht_water_view_two = (ImageView) findViewById(R.id.yacht_water_view_two);
+
+        moveYechtWaterOne();
+        //moveYechtWaterTwo();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                moveYechtWaterTwo();
+            }
+
+        }, 1000);
 
         Rotation rotation = new Rotation(yacht_user_portrait);
         rotation.startRotation(0, 40, 0, 15);
@@ -115,7 +132,6 @@ public class MainActivity extends Activity {
             }
         }, 1800);
     }
-
 
     /*private void shearTransformation(ImageView view) {
         Matrix matrix = new Matrix();
@@ -423,4 +439,113 @@ public class MainActivity extends Activity {
 
         view.invalidate();
     }*/
+
+    private void moveYechtWaterOne() {
+
+        /*AnimationSet arrSet = new AnimationSet(false);
+        Animation animation_left = new TranslateAnimation(0, 100, 0, 0);
+        animation_left.setDuration(1000);
+        animation_left.setFillAfter(true);
+
+        Animation animation_right = new TranslateAnimation(0, -100, 0, 0);
+        animation_right.setDuration(1000);
+        animation_right.setFillAfter(true);
+
+        arrSet.addAnimation(animation_left);
+        arrSet.addAnimation(animation_right);
+        yacht_water_view_one.setAnimation(arrSet);
+
+        arrSet.start();*/
+        final AnimatorSet arrSet = new AnimatorSet();
+        ObjectAnimator translate_left = ObjectAnimator.ofFloat(yacht_water_view_one, View.TRANSLATION_X, 0, 70);
+        ObjectAnimator translate_right = ObjectAnimator.ofFloat(yacht_water_view_one, View.TRANSLATION_X, 70, 0);
+
+        arrSet.setDuration(1000);
+
+        arrSet.playSequentially(translate_left, translate_right);
+        arrSet.setTarget(yacht_water_view_one);
+        translate_left.setRepeatMode(ValueAnimator.INFINITE);
+        arrSet.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                arrSet.start();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        arrSet.start();
+        //arrSet.setStartDelay(500);
+
+        //yacht_water_view_one.startAnimation(animation_left);
+        //yacht_water_view_one.startAnimation(animation_right);
+    }
+
+    private void moveYechtWaterTwo() {
+        final AnimatorSet arrSetTwo = new AnimatorSet();
+
+        /*Animator animation_right = new TranslateAnimation(0, -100, 0, 0);
+        animation_right.setDuration(1000);
+        animation_right.setFillAfter(true);
+
+        Animator animation_left = new TranslateAnimation(0, 100, 0, 0);
+        animation_left.setDuration(1000);
+        animation_left.setFillAfter(true);
+        //yacht_water_view_two.startAnimation(animation_left);
+
+        //arrSet.addAnimation(animation_right);
+        //arrSet.addAnimation(animation_left);
+        arrSet.playSequentially(animation_right, animation_left);
+        //arrSet.setRepeatCount(10);
+        yacht_water_view_one.setAnimation(arrSet);
+
+        arrSet.startNow();*/
+
+        //yacht_water_view_two.startAnimation(animation_right);
+
+        ObjectAnimator translate_left = ObjectAnimator.ofFloat(yacht_water_view_two, View.TRANSLATION_X, 0, 70);
+        ObjectAnimator translate_right = ObjectAnimator.ofFloat(yacht_water_view_two, View.TRANSLATION_X, 70, 0);
+
+        arrSetTwo.setDuration(1000);
+
+        arrSetTwo.playSequentially(translate_left, translate_right);
+        arrSetTwo.setTarget(yacht_water_view_two);
+        translate_left.setRepeatMode(ValueAnimator.INFINITE);
+        arrSetTwo.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                arrSetTwo.start();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        //arrSetTwo.setStartDelay(1000);
+        arrSetTwo.start();
+    }
+
 }

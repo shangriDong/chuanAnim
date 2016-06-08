@@ -31,8 +31,18 @@
 
 
     <ImageView
-        android:id="@+id/yacht_water_view"
+        android:id="@+id/yacht_water_view_one"
+        android:scaleX="1.2"
         android:layout_width="fill_parent"
+        android:layout_height="256.0dip"
+        android:layout_alignParentBottom="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/yacht_water_one" />
+
+    <ImageView
+        android:id="@+id/yacht_water_view_two"
+        android:layout_width="wrap_content"
+        android:scaleX="1.2"
         android:layout_height="256.0dip"
         android:layout_alignParentBottom="true"
         android:scaleType="fitXY"
@@ -42,7 +52,7 @@
         android:id="@+id/yacht_hull_container"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/yacht_water_view"
+        android:layout_above="@+id/yacht_water_view_one"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="60dp"
         android:visibility="invisible">
