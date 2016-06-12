@@ -10,12 +10,15 @@ import android.os.Handler;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.dqs.shangri.customview.MatrixDraweeView;
 import com.dqs.shangri.customview.Rotation;
@@ -45,8 +48,8 @@ public class MainActivity extends Activity {
         yacht_water_view_one = (ImageView) findViewById(R.id.yacht_water_view_one);
         yacht_water_view_two = (ImageView) findViewById(R.id.yacht_water_view_two);
 
+        //背景 水动画
         moveYechtWaterOne();
-        //moveYechtWaterTwo();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -55,6 +58,7 @@ public class MainActivity extends Activity {
 
         }, 1000);
 
+        //轮船头像
         Rotation rotation = new Rotation(yacht_user_portrait);
         rotation.startRotation(0, 40, 0, 15);
 
@@ -68,6 +72,14 @@ public class MainActivity extends Activity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 iv_temp.setVisibility(View.GONE);
+
+                if (yacht_water_view_one.getVisibility() == View.VISIBLE) {
+                    yacht_water_view_one.setVisibility(View.GONE);
+                }
+
+                if (yacht_water_view_two.getVisibility() == View.VISIBLE) {
+                    yacht_water_view_two.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -76,7 +88,7 @@ public class MainActivity extends Activity {
             }
         });
         relativeToParent = Animation.RELATIVE_TO_PARENT;
-        TranslateAnimation trans1 = new TranslateAnimation(relativeToParent, -1, relativeToParent, 0, relativeToParent, 0, relativeToParent, 0);
+        final TranslateAnimation trans1 = new TranslateAnimation(relativeToParent, -1, relativeToParent, 0, relativeToParent, 0, relativeToParent, 0);
         TranslateAnimation trans2 = new TranslateAnimation(relativeToParent, 0, relativeToParent, 1, relativeToParent, 0, relativeToParent, 0);
         trans1.setDuration(2000);
         trans2.setDuration(2000);
@@ -91,25 +103,79 @@ public class MainActivity extends Activity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                //心 入场动画
                 heartView.setBackgroundResource(R.drawable.hear_anim);
                 AnimationDrawable background = (AnimationDrawable) heartView.getBackground();
                 background.start();
 
+                /*//心 变大
+                ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f, 1.2f, 1.0f, 1.2f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                scaleAnimation.setDuration(800);
+                scaleAnimation.setStartOffset(500);
+                scaleAnimation.setFillAfter(true);
+                heartView.startAnimation(scaleAnimation);
+
+                //心 退场动画
                 AlphaAnimation alphaAnimation = new AlphaAnimation(1f, 0f);
                 alphaAnimation.setDuration(500);
                 alphaAnimation.setStartOffset(1800);
                 alphaAnimation.setFillAfter(true);
-                heartView.setAnimation(alphaAnimation);
-                heartView.startAnimation(alphaAnimation);
+                //heartView.setAnimation(alphaAnimation);
+                heartView.startAnimation(alphaAnimation);*/
 
+                heartView(heartView);
+
+
+                //剑 动画
                 AnimationSet arrSet = new AnimationSet(false);
+                Animation endAnim = AnimationUtils.loadAnimation(getApplication(), R.anim.ship_arrow_end);
+                endAnim.setStartOffset(1000);
+                endAnim.setDuration(1500);
+                endAnim.setInterpolator(new LinearInterpolator());
+
+                Animation startAnim = AnimationUtils.loadAnimation(getApplication(), R.anim.ship_arrow_start);
+                startAnim.setStartOffset(500);
+                startAnim.setDuration(1500);
+                startAnim.getFillBefore();
+                startAnim.setInterpolator(new LinearInterpolator());
+
+                arrSet.addAnimation(startAnim);
+                arrSet.addAnimation(endAnim);
+                arrSet.setFillAfter(true);
+                arrSet.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                        arrowIV.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                        arrowIV.setVisibility(View.GONE);
+                    }
+                });
+                arrowIV.setAnimation(arrSet);
+
+                /*AnimationSet arrSet = new AnimationSet(false);
 //                RotateAnimation rotateArrow1=new RotateAnimation();
                 TranslateAnimation transArrow1 = new TranslateAnimation(relativeToParent, -1, relativeToParent, 0, relativeToParent, 0.3f, relativeToParent, 0f);
                 TranslateAnimation transArrow2 = new TranslateAnimation(relativeToParent, 0, relativeToParent, 1, relativeToParent, 0f, relativeToParent, 0.3f);
                 transArrow1.setDuration(1000);
                 transArrow2.setDuration(1000);
+
+                RotateAnimation rotateArrow = new RotateAnimation(-20, 10);
+                rotateArrow.setDuration(1000);
+                //arrowIV.startAnimation(rotateArrow);
+
+
                 arrSet.addAnimation(transArrow1);
-                arrSet.addAnimation(transArrow2);
+
+                //arrSet.addAnimation(transArrow2);
+                //arrSet.addAnimation(rotateArrow);
                 arrSet.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
@@ -128,7 +194,11 @@ public class MainActivity extends Activity {
                 });
                 transArrow2.setStartOffset(1000);
                 arrSet.setFillAfter(true);
-                arrowIV.setAnimation(arrSet);
+                arrowIV.setAnimation(arrSet);*/
+
+
+                //rotateViewDelay(500, arrowIV);
+                //arrowLy.startAnimation(arrSet);
             }
         }, 1800);
     }
@@ -441,7 +511,7 @@ public class MainActivity extends Activity {
     }*/
 
     private void moveYechtWaterOne() {
-
+        yacht_water_view_one.setVisibility(View.VISIBLE);
         /*AnimationSet arrSet = new AnimationSet(false);
         Animation animation_left = new TranslateAnimation(0, 100, 0, 0);
         animation_left.setDuration(1000);
@@ -459,9 +529,7 @@ public class MainActivity extends Activity {
         final AnimatorSet arrSet = new AnimatorSet();
         ObjectAnimator translate_left = ObjectAnimator.ofFloat(yacht_water_view_one, View.TRANSLATION_X, 0, 70);
         ObjectAnimator translate_right = ObjectAnimator.ofFloat(yacht_water_view_one, View.TRANSLATION_X, 70, 0);
-
         arrSet.setDuration(1000);
-
         arrSet.playSequentially(translate_left, translate_right);
         arrSet.setTarget(yacht_water_view_one);
         translate_left.setRepeatMode(ValueAnimator.INFINITE);
@@ -494,6 +562,7 @@ public class MainActivity extends Activity {
     }
 
     private void moveYechtWaterTwo() {
+        yacht_water_view_two.setVisibility(View.VISIBLE);
         final AnimatorSet arrSetTwo = new AnimatorSet();
 
         /*Animator animation_right = new TranslateAnimation(0, -100, 0, 0);
@@ -544,8 +613,42 @@ public class MainActivity extends Activity {
 
             }
         });
-        //arrSetTwo.setStartDelay(1000);
         arrSetTwo.start();
     }
 
+
+    private void rotateViewDelay(final long delay, final View view) {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                RotateAnimation rotateArrow = new RotateAnimation(0, 10);
+                rotateArrow.setDuration(1000);
+                view.startAnimation(rotateArrow);
+            }
+        }, delay);
+    }
+
+    private void heartView(View view) {
+        AnimatorSet animatorSet = new AnimatorSet();
+
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(view, "scaleX", 1.0f, 1.1f);
+        scaleX.setStartDelay(200);
+        scaleX.setDuration(1500);
+
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(view, "scaleY", 1.0f, 1.1f);
+        scaleX.setStartDelay(200);
+        scaleY.setDuration(1500);
+
+        ObjectAnimator alpha = ObjectAnimator.ofFloat(view, "alpha", 1.0f, 0.0f);
+        alpha.setDuration(500);
+
+        AnimatorSet.Builder builder = animatorSet.play(scaleX);
+        builder.with(scaleY);
+        builder.before(alpha);
+
+
+        animatorSet.setTarget(view);
+        animatorSet.start();
+
+    }
 }
